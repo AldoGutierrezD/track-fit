@@ -1,13 +1,17 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #FAF4E4;
+  --foreground: #121212;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-white-ft: #FEFDFB;
+  --font-against: 'Against';
+  --font-brule: 'Brule';
+  --font-inter: 'Inter';
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -19,8 +23,28 @@
   }
 }
 
+@font-face {
+  font-family: "Against";
+  src: url("/fonts/Against-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Brule";
+  src: url("/fonts/Brule-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-Variable.ttf");
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.right-bar>div {
+  background-image: url('/images/right-cover.webp');
+  background-position: center;
 }
