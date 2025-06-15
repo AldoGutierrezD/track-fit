@@ -2,6 +2,8 @@ import MacrosDia from "./MacrosDia"
 import CuerpoHoy from "./CuerpoHoy"
 import Objetivo from "./Objetivo"
 import GymRoutine from "./GymRoutine"
+import GymPR from "./GymPR"
+import Diet from "./Diet"
 
 export default function Dashboard() {
     return (
@@ -27,6 +29,17 @@ export default function Dashboard() {
             <section className="w-full grid grid-cols-3 gap-4 mt-8">
                 <div className="col-span-1">
                     <GymRoutine />
+                </div>
+                <div className="col-span-2">
+                    <h4 className="font-inter font-semibold text-lg mb-1">Esto es PR mami 🔥</h4>
+                    <GymPR />
+                </div>
+            </section>
+
+            <section className="w-full mt-8">
+                <div className="col-span-2">
+                    <h4 className="font-inter font-semibold text-lg mb-1">Hora de comer</h4>
+                    <Diet />
                 </div>
             </section>
         </section>
