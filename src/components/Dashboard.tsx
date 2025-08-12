@@ -7,7 +7,7 @@ import Diet from "./Diet"
 
 export default function Dashboard() {
     return (
-        <section className="w-full" style={{ margin: '15px 5px 0 100px' }}>
+        <section className="w-full col-span-9" style={{ margin: '15px 5px 0 100px' }}>
             <h1 className="font-against text-2xl mt-6">Hola, Aldo!</h1>
             <h4 className="font-brule text-base font-light">Espero que tengas un excelente Lunes</h4>
 

@@ -2,8 +2,8 @@ import { Weight, Ruler } from "lucide-react";
 
 export default function RightBar() {
     return (
-        <aside className="right-bar w-[420px] h-screen p-4 font-inter">
-            <div className="relative w-full h-full rounded-2xl overflow-hidden p-3">
+        <aside className="right-bar fixed r-0 col-span-2 col-start-11 h-screen p-4 font-inter">
+            <div className="relative w-[245px] h-full rounded-2xl overflow-hidden p-3">
 
                 <div className="absolute inset-0 bg-black/50 z-0"></div>
 
