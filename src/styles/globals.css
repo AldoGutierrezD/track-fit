@@ -1,51 +1,81 @@
 @import "tailwindcss";
 
 :root {
-  --background: #FAF4E4;
-  --foreground: #121212;
+    --background: #FAF4E4;
+    --foreground: #121212;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-white-ft: #FEFDFB;
-  --color-green-ground: #98a369;
-  --font-against: 'Against';
-  --font-brule: 'Brule';
-  --font-inter: 'Inter';
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --color-white-ft: #FEFDFB;
+    --color-green-ground: #98a369;
+    --font-against: 'Against';
+    --font-brule: 'Brule';
+    --font-inter: 'Inter';
+    --font-sans: var(--font-geist-sans);
+    --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+    :root {
+        --background: #0a0a0a;
+        --foreground: #ededed;
+    }
 }
 
 @font-face {
-  font-family: "Against";
-  src: url("/fonts/Against-Regular.ttf");
+    font-family: "Against";
+    src: url("/fonts/Against-Regular.ttf");
 }
 
 @font-face {
-  font-family: "Brule";
-  src: url("/fonts/Brule-Regular.ttf");
+    font-family: "Brule";
+    src: url("/fonts/Brule-Regular.ttf");
 }
 
 @font-face {
-  font-family: "Inter";
-  src: url("/fonts/Inter-Variable.ttf");
+    font-family: "Inter";
+    src: url("/fonts/Inter-Variable.ttf");
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+    background: var(--background);
+    color: var(--foreground);
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .right-bar>div {
-  background-image: url('/images/right-cover.webp');
-  background-position: center;
+    background-image: url('/images/right-cover.webp');
+    background-position: center;
+}
+
+.btn-primary {
+    background-color: #543bfd;
+    width: auto;
+    padding: 10px 18px;
+    margin: 0px;
+    border-radius: 35px;
+    border: none;
+    color: #FFF;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.badge {
+    padding: 4px 16px;
+    border-radius: 6px;
+    font-weight: bold;
+}
+
+.badge-warning {
+    background-color: #fee685;
+    color: #7b3306;
 }
