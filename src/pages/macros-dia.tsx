@@ -5,6 +5,7 @@ import { login } from "../services/authService";
 import { validateMacros } from "../validators/macrosValidator";
 import { Beef, Wheat, Droplet, Save } from "lucide-react"
 import Swal from "sweetalert2";
+import FullScreenLoader from "@/components/LoadingOverlay";
 
 export default function MacrosDia() {
 
@@ -36,6 +37,8 @@ export default function MacrosDia() {
 
     const getMacros = async () => {
 
+        setLoading(true);
+
         const { data: { user } } = await supabase.auth.getUser();
 
         if (!user) return;
@@ -60,6 +63,8 @@ export default function MacrosDia() {
         setProteinas(data.proteinas || "");
         setGrasas(data.grasas || "");
         setKcal(Number(data.kcal_totales) || 0);
+
+        setLoading(false);
 
     }
 
@@ -120,6 +125,7 @@ export default function MacrosDia() {
 
     return (
         <MainLayout>
+            <FullScreenLoader loading={loading} />
             <h1 className="font-against text-2xl mt-6 mb-3">Macros del día</h1>
             <form onSubmit={handleSubmit}>
                 <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-3">
