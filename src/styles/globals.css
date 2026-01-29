@@ -69,13 +69,37 @@ body {
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
+/* BADGES */
 .badge {
     padding: 4px 16px;
     border-radius: 6px;
     font-weight: bold;
+    width: max-content;
+}
+
+.badge-info {
+    background-color: #dbeafe;
+    color: #2b7fff;
+}
+
+.badge-success {
+    background-color: #dbfce7;
+    color: #00c950;
 }
 
 .badge-warning {
     background-color: #fee685;
     color: #7b3306;
+}
+
+.badge-danger {
+    background-color: #ffe2e2;
+    color: #fb2c36;
+}
+
+input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    border: none;
+    accent-color: #2b7fff;
 }
