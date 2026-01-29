@@ -10,3 +10,12 @@ export interface SesionMedicionRow {
     valor: number;
     unidad: string;
 }
+
+export interface Objetivo {
+    id: string,
+    medicion: string,
+    descripcion: string,
+    valor: number,
+    fecha: string,
+    estado: number
+}
