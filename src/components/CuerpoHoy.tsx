@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { supabase } from "@/lib/supabase";
-import ItemCuerpoHoy from "./ItemCuerpoHoy"
+import ItemCuerpoHoy from "./ItemCuerpoHoy";
+import FullScreenLoader from "./LoadingOverlay";
 
 export default function CuerpoHoy() {
 
@@ -8,6 +9,7 @@ export default function CuerpoHoy() {
     const [masa, setMasa] = useState(0);
     const [grasa, setGrasa] = useState(0);
     const [brazo, setBrazo] = useState(0);
+    const [loading, setLoading] = useState(false);
 
 
     useEffect(() => {
@@ -16,6 +18,8 @@ export default function CuerpoHoy() {
 
 
     const getEstadisticas = async () => {
+
+        setLoading(true);
 
         const { data: { user } } = await supabase.auth.getUser();
 
@@ -32,6 +36,8 @@ export default function CuerpoHoy() {
             setGrasa(data[0].grasa);
             setBrazo(data[0].brazo);
         }
+
+        setLoading(false);
 
     }
 
@@ -64,6 +70,7 @@ export default function CuerpoHoy() {
 
     return (
         <div className="grid grid-cols-2 gap-4 h-[90%]">
+            <FullScreenLoader loading={loading} />
             {
                 items.map((element, index) => (
                     <ItemCuerpoHoy key={index} background={element.background} image={element.image} value={element.value} title={element.title} />

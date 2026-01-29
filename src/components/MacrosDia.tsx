@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabase";
+import FullScreenLoader from "./LoadingOverlay";
 
 export default function MacrosDia() {
 
@@ -7,12 +8,15 @@ export default function MacrosDia() {
     const [proteinas, setProteinas] = useState(0);
     const [grasas, setGrasas] = useState(0);
     const [kcal, setKcal] = useState(0);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         getMacros();
     }, []);
 
     const getMacros = async () => {
+
+        setLoading(true);
 
         const { data: { user } } = await supabase.auth.getUser();
 
@@ -43,10 +47,13 @@ export default function MacrosDia() {
         setGrasas(perGrasas);
         setKcal(Number(data.kcal_totales) || 0);
 
+        setLoading(false);
+
     }
 
     return (
         <div className="flex border-[1px] rounded-2xl h-[90%]">
+            <FullScreenLoader loading={loading} />
             <div className="w-2/5 relative bg-green-ground rounded-2xl p-4 text-center">
                 <img src="./icons/fire-3d.png" width={150} alt="Icono 3D de fuego" />
                 <h5 className="font-inter font-bold text-xl">{kcal} Kcal</h5>
