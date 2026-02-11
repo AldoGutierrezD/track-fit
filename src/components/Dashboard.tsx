@@ -6,10 +6,16 @@ import GymPR from "./GymPR"
 import Diet from "./Diet"
 
 export default function Dashboard() {
+
+    const dias = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
+    let date = new Date();
+    let dayNumber = date.getDay();
+    let day = dias[dayNumber - 1];
+
     return (
         <section>
             <h1 className="font-against text-2xl mt-6">Hola, Aldo!</h1>
-            <h4 className="font-brule text-base font-light">Espero que tengas un excelente Lunes</h4>
+            <h4 className="font-brule text-base font-light">Espero que tengas un excelente {day}</h4>
 
             <section className="w-full grid grid-cols-3 gap-4 items-stretch mt-4">
                 <div>
