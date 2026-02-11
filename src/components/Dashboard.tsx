@@ -27,10 +27,10 @@ export default function Dashboard() {
             </section>
 
             <section className="w-full grid grid-cols-3 gap-4 mt-8">
-                <div className="col-span-1">
+                <div className="col-span-full">
                     <GymRoutine />
                 </div>
-                <div className="col-span-2">
+                <div className="col-span-full">
                     <h4 className="font-inter font-semibold text-lg mb-1">Esto es PR mami 🔥</h4>
                     <GymPR />
                 </div>

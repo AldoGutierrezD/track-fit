@@ -19,3 +19,34 @@ export interface Objetivo {
     fecha: string,
     estado: number
 }
+
+export interface EjercicioGym {
+    id: number,
+    id_categoria_musculo: number,
+    nombre: string,
+    icon: string
+}
+
+export interface EjercicioGymOptions {
+    value: number,
+    label: string,
+    icon: string,
+    series: number | "",
+    reps: number | "",
+    indicaciones: string
+}
+
+export interface Rutina {
+    id: string,
+    dia: string,
+    ejercicios: RutinaEjercicio[]
+}
+
+export interface RutinaEjercicio {
+    nombre: string,
+    musculo: string,
+    icon: string,
+    series: number,
+    reps: number,
+    indicaciones: string
+}

@@ -1,5 +1,5 @@
 import ButtonMenu from "./ButtonMenu";
-import { Flame, CalendarPlus2, Goal } from "lucide-react";
+import { Flame, CalendarPlus2, Goal, Dumbbell } from "lucide-react";
 import Link from "next/link";
 
 export default function LeftBar() {
@@ -10,6 +10,7 @@ export default function LeftBar() {
                 <ButtonMenu link="/macros-dia" title="Macros del día" icon={Flame} />
                 <ButtonMenu link="/sesiones" title="Nueva sesión" icon={CalendarPlus2} />
                 <ButtonMenu link="/objetivos" title="Establecer objetivos" icon={Goal} />
+                <ButtonMenu link="/gym-routine" title="Rutinas del gimnasio" icon={Dumbbell} />
             </nav>
         </aside>
     )
