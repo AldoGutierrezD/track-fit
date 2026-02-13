@@ -52,9 +52,9 @@ export default function MacrosDia() {
     }
 
     return (
-        <div className="flex border-[1px] rounded-2xl h-[90%]">
+        <div className="flex border-3 rounded-2xl h-[90%] shadow-[0px_5px_0px_0px_#000000]">
             <FullScreenLoader loading={loading} />
-            <div className="w-2/5 relative bg-green-ground rounded-2xl p-4 text-center">
+            <div className="w-2/5 relative bg-green-ground rounded-xl p-4 text-center">
                 <img src="./icons/fire-3d.png" width={150} alt="Icono 3D de fuego" />
                 <h5 className="font-inter font-bold text-xl">{kcal} Kcal</h5>
                 <span className="absolute font-inter font-light text-xs left-0 right-0 bottom-5">Calorías por día</span>

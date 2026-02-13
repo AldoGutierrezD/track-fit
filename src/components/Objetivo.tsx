@@ -46,7 +46,7 @@ export default function Objetivo() {
     }, [valorActual]);
 
     return (
-        <div className="h-[90%] border-[1px] relative rounded-2xl flex justify-center items-center bg-gradient-to-t from-amber-50 to-amber-200">
+        <div className="h-[90%] border-3 relative rounded-2xl flex justify-center items-center bg-gradient-to-t from-amber-50 to-amber-200 shadow-[0px_5px_0px_0px_#000000]">
             <FullScreenLoader loading={loading} />
             <span className='badge badge-info absolute bottom-3 left-1/2 -translate-x-1/2'>{objetivo}</span>
             <div className="relative size-50 bottom-4">

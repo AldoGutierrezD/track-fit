@@ -10,7 +10,7 @@ type Item = {
 
 export default function ItemGymRoutine({ image, exercise, description, sets, reps }: Item) {
     return (
-        <div className="w-full col-span-1 bg-[#aad7b8] flex justify-between items-center border-2 rounded-xl py-1 px-2 shadow-[0px_5px_0px_0px_#000000]">
+        <div className="w-full col-span-1 bg-[#aad7b8] flex justify-between items-center border-3 rounded-xl py-1 px-2 shadow-[0px_5px_0px_0px_#000000]">
             <div className="flex gap-2 items-center">
                 {/* <img src={`./icons/gym/${image}`} className="rounded-xl w-16 h-16 object-cover" alt="" /> */}
                 <div className="square-icon-big square-icon-warning">
