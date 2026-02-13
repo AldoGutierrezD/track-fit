@@ -69,8 +69,6 @@ export default function Objetivos() {
 
         setRutinas(getRutinaEjercicios);
 
-        console.log(getRutinaEjercicios)
-
         setLoading(false);
 
     }

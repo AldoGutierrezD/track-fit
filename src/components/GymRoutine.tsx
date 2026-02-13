@@ -6,27 +6,6 @@ import Swal from "sweetalert2"
 import FullScreenLoader from "./LoadingOverlay"
 import { RutinaEjercicio } from "@/types/interfaces"
 
-const items = [
-    {
-        image: 'press.webp',
-        exercise: 'Press en banco inclinado',
-        description: '4 series x 8-10 repeticiones',
-        sets: '4x8'
-    },
-    {
-        image: 'press.webp',
-        exercise: 'Aperturas en peck deck',
-        description: '4 series x 10-12 repeticiones',
-        sets: '10x12'
-    },
-    {
-        image: 'press.webp',
-        exercise: 'Press plano con barra',
-        description: '3 series x 8-10 repeticiones',
-        sets: '3x10'
-    }
-]
-
 export default function GymRoutine() {
 
     const [ejercicios, setEjercicios] = useState<RutinaEjercicio[]>([]);

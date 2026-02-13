@@ -50,3 +50,13 @@ export interface RutinaEjercicio {
     reps: number,
     indicaciones: string
 }
+
+export interface EjercicioGymPR {
+    icon: string,
+    nombre: string,
+    fecha: string,
+    series: number,
+    reps: number,
+    peso: number,
+    peso_anterior: number
+}

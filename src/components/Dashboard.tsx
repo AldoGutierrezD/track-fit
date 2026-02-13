@@ -1,9 +1,15 @@
+import { useState, useEffect } from "react"
+import { Plus } from "lucide-react"
 import MacrosDia from "./MacrosDia"
 import CuerpoHoy from "./CuerpoHoy"
 import Objetivo from "./Objetivo"
 import GymRoutine from "./GymRoutine"
 import GymPR from "./GymPR"
+import { Modal } from "./Modal"
+import ModalPR from "./ModalPR"
 import Diet from "./Diet"
+import { supabase } from "@/lib/supabase"
+import { EjercicioGymPR } from "@/types/interfaces"
 
 export default function Dashboard() {
 
@@ -11,6 +17,37 @@ export default function Dashboard() {
     let date = new Date();
     let dayNumber = date.getDay();
     let day = dias[dayNumber - 1];
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [ejerciciosPR, setEjerciciosPR] = useState<EjercicioGymPR[]>([]);
+    const [loading, setLoading] = useState(false);
+
+
+    useEffect(() => {
+        getEjerciciosPR();
+    }, []);
+
+
+    const getEjerciciosPR = async () => {
+
+        setLoading(true);
+
+        const { data: { user } } = await supabase.auth.getUser();
+
+        if (!user) return
+
+        const { data, error } = await supabase.rpc(
+            "get_ejercicios_gym_pr",
+            { id_usuariod: user.id }
+        );
+
+        if (!error) {
+            setEjerciciosPR(data);
+        }
+
+        setLoading(false);
+
+    }
 
     return (
         <section>
@@ -37,8 +74,17 @@ export default function Dashboard() {
                     <GymRoutine />
                 </div>
                 <div className="col-span-full">
-                    <h4 className="font-inter font-semibold text-lg mb-1">Esto es PR mami 🔥</h4>
-                    <GymPR />
+                    <div className="flex justify-between">
+                        <h4 className="font-inter font-semibold text-lg mb-1">Esto es PR mami 🔥</h4>
+                        <button type="button" className="btn-primary" onClick={() => setIsModalOpen(true)}>
+                            <Plus size={24} />
+                            Nuevo PR
+                        </button>
+                        <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title="Registrar nuevo PR">
+                            <ModalPR onSuccess={() => setIsModalOpen(false)} refreshData={() => getEjerciciosPR()} />
+                        </Modal>
+                    </div>
+                    <GymPR ejercicios={ejerciciosPR} />
                 </div>
             </section>
 

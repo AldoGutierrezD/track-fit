@@ -1,39 +1,21 @@
 import ItemGymPR from "./ItemGymPR"
+import { EjercicioGymPR } from "@/types/interfaces";
 
-const items = [
-    {
-        image: 'press.webp',
-        exercise: 'Press inclinado',
-        weight: 100,
-        reps: 1,
-        date: '10 jun 2025',
-        pr: 5
-    },
-    {
-        image: 'press.webp',
-        exercise: 'Sentadilla libre',
-        weight: 120,
-        reps: 2,
-        date: '8 jun 2025',
-        pr: 10
-    },
-    {
-        image: 'press.webp',
-        exercise: 'Press militar',
-        weight: 40,
-        reps: 3,
-        date: '12 jun 2025',
-        pr: 10
-    }
-]
+type Props = {
+    ejercicios: EjercicioGymPR[]
+}
 
-export default function GymPR() {
+export default function GymPR({ ejercicios }: Props) {
+
     return (
-        <div className="w-full flex flex-wrap gap-3">
+        <div className="w-full grid grid-cols-8 sm:grid-cols-4 md:grid-cols-8 gap-3">
             {
-                items.map((element, index) => (
-                    <ItemGymPR key={index} image={element.image} exercise={element.exercise} weight={element.weight} reps={element.reps} date={element.date} pr={element.pr} />
-                ))
+                ejercicios.map((item, index) => {
+                    let pr = (!item.peso_anterior || item.peso_anterior <= 0) ? 0 : (item.peso - item.peso_anterior);
+                    return (
+                        <ItemGymPR key={index} image={item.icon} exercise={item.nombre} weight={item.peso} reps={item.reps} date={item.fecha} pr={pr} />
+                    )
+                })
             }
         </div>
     )
