@@ -13,10 +13,10 @@ import { EjercicioGymPR } from "@/types/interfaces"
 
 export default function Dashboard() {
 
-    const dias = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
+    const dias = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
     let date = new Date();
     let dayNumber = date.getDay();
-    let day = dias[dayNumber - 1];
+    let day = dias[dayNumber];
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [ejerciciosPR, setEjerciciosPR] = useState<EjercicioGymPR[]>([]);
