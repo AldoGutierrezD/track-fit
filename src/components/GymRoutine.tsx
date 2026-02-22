@@ -50,14 +50,7 @@ export default function GymRoutine() {
             return
         }
 
-        if (data.length <= 0) {
-            Swal.fire({
-                icon: "info",
-                title: "Mensaje",
-                text: "No tienes programada una rutina para el día de hoy"
-            });
-            return
-        }
+        if (data.length <= 0) return
 
         const { data: dataEjercicios, error: errorEjercicios } = await supabase.rpc(
             "get_rutina_gym_ejercicios",
