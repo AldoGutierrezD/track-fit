@@ -1,73 +1,65 @@
-import ItemFood from "./ItemFood"
+import { useEffect, useState } from "react";
+import ItemFood from "./ItemFood";
+import { supabase } from "@/lib/supabase";
+import { DietaPlatillo } from "@/types/interfaces";
+import Swal from "sweetalert2";
+import FullScreenLoader from "./LoadingOverlay";
 
-const diet = [
-    {
-        color: "bg-pink-300",
-        foodType: "Desayuno",
-        hour: "08:00 am",
-        name: "Chilaquiles Fit",
-        images: ['tortillas.jpg', 'huevo.jpg', 'nopales.jpg'],
-        carbs: 80,
-        protein: 100,
-        fat: 12
-    },
-    {
-        color: "bg-lime-200",
-        foodType: "Colación",
-        hour: "11:00 am",
-        name: "Hotcakes de avena",
-        images: ['tortillas.jpg', 'huevo.jpg', 'nopales.jpg'],
-        carbs: 70,
-        protein: 80,
-        fat: 6
-    },
-    {
-        color: "bg-amber-200",
-        foodType: "Comida",
-        hour: "02:00 pm",
-        name: "Bisteck con arroz",
-        images: ['tortillas.jpg', 'huevo.jpg', 'nopales.jpg'],
-        carbs: 80,
-        protein: 100,
-        fat: 12
-    },
-    {
-        color: "bg-blue-200",
-        foodType: "Colación",
-        hour: "07:00 pm",
-        name: "Molida con pasta",
-        images: ['tortillas.jpg', 'huevo.jpg', 'nopales.jpg'],
-        carbs: 80,
-        protein: 100,
-        fat: 12
-    },
-    {
-        color: "bg-purple-200",
-        foodType: "Cena",
-        hour: "10:00 pm",
-        name: "Licuado de proteína",
-        images: ['tortillas.jpg', 'huevo.jpg', 'nopales.jpg'],
-        carbs: 80,
-        protein: 100,
-        fat: 12
-    }
-]
 
 export default function Diet() {
+
+    const COLORS = ["bg-pink-300", "bg-lime-200", "bg-amber-200", "bg-blue-200", "bg-purple-200"];
+    const [dietaPlatillos, setDietaPlatillos] = useState<DietaPlatillo[]>([]);
+    const [loading, setLoading] = useState(false);
+
+
+    useEffect(() => {
+        getDieta();
+    }, []);
+
+
+    const getDieta = async () => {
+
+        setLoading(true);
+
+        const { data: { user } } = await supabase.auth.getUser();
+
+        if (!user) return;
+
+        const { data, error } = await supabase.rpc(
+            "get_dieta_completa",
+            { id_usuariod: user.id }
+        );
+
+        if (error) {
+            Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "Error al cargar los datos de la dieta"
+            });
+            return
+        }
+
+        setDietaPlatillos(data);
+
+        setLoading(false);
+
+    }
+
     return (
         <div className="grid grid-cols-3 gap-3">
+            <FullScreenLoader loading={loading} />
             {
-                diet.map((element, index) => (
+                dietaPlatillos.map((item, index) => (
                     <ItemFood
-                        key={index}
-                        color={element.color}
-                        foodType={element.foodType}
-                        hour={element.hour}
-                        name={element.name}
-                        images={element.images}
-                        carbs={element.carbs}
-                        protein={element.protein}
-                        fat={element.fat}
+                        key={item.id}
+                        color={COLORS[index]}
+                        hour={item.horario}
+                        name={item.nombre}
+                        carbs={item.carbohidratos}
+                        protein={item.proteina}
+                        fat={item.grasas}
+                        ingredients={item.ingredientes}
                     />
                 ))
             }

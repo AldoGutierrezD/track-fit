@@ -88,7 +88,7 @@ export default function Dashboard() {
                 </div>
             </section>
 
-            <section className="w-full mt-8">
+            <section className="w-full mt-12">
                 <div className="col-span-2">
                     <h4 className="font-inter font-semibold text-lg mb-1">Hora de comer</h4>
                     <Diet />

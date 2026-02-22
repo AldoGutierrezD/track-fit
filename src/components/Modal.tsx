@@ -14,7 +14,7 @@ export function Modal({ isOpen, onClose, title, children }: ModalProps) {
 
     return createPortal(
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-10" onClick={onClose}>
-            <div className="bg-white rounded-xl w-full max-w-md overflow-hidden border-3" onClick={(e) => e.stopPropagation()}>
+            <div className="bg-white rounded-xl w-auto overflow-hidden border-3" onClick={(e) => e.stopPropagation()}>
                 <div className="w-full bg-[#fae1a0] p-4 border-b-3 flex justify-between">
                     <h4 className="font-bold">{title}</h4>
                     <button

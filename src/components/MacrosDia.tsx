@@ -22,13 +22,10 @@ export default function MacrosDia() {
 
         if (!user) return;
 
-        const { data, error } = await supabase
-            .from("rt_usuarios_macros")
-            .select("carbohidratos, proteinas, grasas, kcal_totales")
-            .eq("id_usuario", user.id)
-            .order("created_at", { ascending: false })
-            .limit(1)
-            .single();
+        const { data, error } = await supabase.rpc(
+            "get_usuario_macros",
+            { id_usuariod: user.id }
+        )
 
         if (error || !data) {
             setCarbohidratos(0);
@@ -38,14 +35,16 @@ export default function MacrosDia() {
             return
         }
 
-        let perCarbohidratos = data.carbohidratos ? (Number(data.carbohidratos) * 4 / data.kcal_totales) * 100 : 0;
-        let perProteinas = data.proteinas ? (Number(data.proteinas) * 4 / data.kcal_totales) * 100 : 0;
-        let perGrasas = data.grasas ? (Number(data.grasas) * 9 / data.kcal_totales) * 100 : 0;
+        console.log(data)
+
+        let perCarbohidratos = data[0].carbohidratos ? (Number(data[0].carbohidratos) * 4 / data[0].kcal) * 100 : 0;
+        let perProteinas = data[0].proteina ? (Number(data[0].proteina) * 4 / data[0].kcal) * 100 : 0;
+        let perGrasas = data[0].grasas ? (Number(data[0].grasas) * 9 / data[0].kcal) * 100 : 0;
 
         setCarbohidratos(perCarbohidratos);
         setProteinas(perProteinas);
         setGrasas(perGrasas);
-        setKcal(Number(data.kcal_totales) || 0);
+        setKcal(Number(data[0].kcal) || 0);
 
         setLoading(false);
 

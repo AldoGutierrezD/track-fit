@@ -60,3 +60,78 @@ export interface EjercicioGymPR {
     peso: number,
     peso_anterior: number
 }
+
+export interface UnidadIngrediente {
+    id: number,
+    nombre: string
+}
+
+export interface Ingrediente {
+    id: number,
+    id_categoria_ingrediente: number,
+    nombre: string,
+    kcal: number,
+    proteina: number,
+    carbohidratos: number,
+    grasas: number,
+    gramos_por_unidad: number
+}
+
+export interface IngredienteOption extends Ingrediente {
+    value: number,
+    label: string
+}
+
+export interface Platillo {
+    id: string,
+    nombre: string,
+    kcal_totales: number,
+    proteina: number,
+    carbohidratos: number,
+    grasas: number
+}
+
+export interface PlatilloIngrediente {
+    id: number,
+    nombre: string,
+    cantidad: number,
+    id_unidad: number,
+    gramos_calculados: number,
+    kcal: number,
+    proteina: number,
+    carbohidratos: number,
+    grasas: number,
+    gramos_por_unidad: number,
+    kcalTotales: number,
+    proteinasTotales: number,
+    carbohidratosTotales: number,
+    grasasTotales: number
+}
+
+export interface Dieta {
+    id: string,
+    nombre: string,
+    hora: string,
+    kcalTotales: number,
+    proteinasTotales: number,
+    carbohidratosTotales: number,
+    grasasTotales: number
+}
+
+export interface DietaPlatillo {
+    id: string,
+    horario: string,
+    nombre: string,
+    descripcion: string,
+    kcal_totales: number,
+    proteina: number,
+    carbohidratos: number,
+    grasas: number,
+    ingredientes: DietaPlatilloIngrediente[]
+}
+
+export interface DietaPlatilloIngrediente {
+    nombre: string,
+    cantidad: number,
+    unidad: string
+}

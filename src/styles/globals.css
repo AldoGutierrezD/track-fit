@@ -50,7 +50,8 @@ body {
     background-position: center;
 }
 
-.btn-primary {
+.btn-primary,
+.btn-secondary {
     position: relative;
     background-color: #fae1a0;
     width: auto;
@@ -66,11 +67,13 @@ body {
     cursor: pointer;
 }
 
-.btn-primary:hover {
+.btn-primary:hover,
+.btn-secondary:hover {
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
-.btn-primary::after {
+.btn-primary::after,
+.btn-secondary::after {
     content: '';
     position: absolute;
     bottom: -6px;
@@ -81,12 +84,21 @@ body {
     background-color: #000000;
 }
 
+.btn-secondary {
+    background-color: #70cdde;
+}
+
 /* BADGES */
 .badge {
     padding: 4px 16px;
     border-radius: 6px;
     font-weight: bold;
     width: max-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
 }
 
 .badge-info {
