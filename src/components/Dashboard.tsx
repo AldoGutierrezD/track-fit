@@ -10,6 +10,10 @@ import ModalPR from "./ModalPR"
 import Diet from "./Diet"
 import { supabase } from "@/lib/supabase"
 import { EjercicioGymPR } from "@/types/interfaces"
+import WeightChart from "./WeightChart"
+import FatChart from "./FatChart"
+import BodyMassChart from "./BodyMassChart"
+import BicepChart from "./BicepChart"
 
 export default function Dashboard() {
 
@@ -92,6 +96,19 @@ export default function Dashboard() {
                 <div className="col-span-2">
                     <h4 className="font-inter font-semibold text-lg mb-1">Hora de comer</h4>
                     <Diet />
+                </div>
+            </section>
+
+            <section className="w-full mt-12">
+                <h4 className="font-inter font-semibold text-lg mb-1">Estadísticas</h4>
+                <div className="w-full grid grid-cols-3 gap-4 items-stretch">
+                    <div className="col-span-2">
+                        <WeightChart />
+                    </div>
+                    <div className="col-span-1">
+                        <FatChart />
+                        <BodyMassChart />
+                    </div>
                 </div>
             </section>
         </section>
