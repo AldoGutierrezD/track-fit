@@ -30,11 +30,11 @@ export default function CuerpoHoy() {
             { id_usuariod: user.id }
         );
 
-        if (!error) {
-            setPeso(data[0].peso);
-            setMasa(data[0].masa);
-            setGrasa(data[0].grasa);
-            setBrazo(data[0].brazo);
+        if (!error && data.length > 0) {
+            setPeso(data[0].peso ?? 0);
+            setMasa(data[0].masa ?? 0);
+            setGrasa(data[0].grasa ?? 0);
+            setBrazo(data[0].brazo ?? 0);
         }
 
         setLoading(false);
