@@ -8,7 +8,7 @@ export default function Objetivo() {
     const [valorObjetivo, setValorObjetivo] = useState(0);
     const [unidad, setUnidad] = useState("");
     const [nombreUnidad, setNombreUnidad] = useState("");
-    const [objetivo, setObjetivo] = useState("");
+    const [objetivo, setObjetivo] = useState("Sin definir");
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
@@ -28,7 +28,7 @@ export default function Objetivo() {
             { id_usuariod: user.id }
         );
 
-        if (!error) {
+        if (!error && data.length > 0) {
             setValorObjetivo(Number(data[0].valor_objetivo));
             setValorActual(Number(data[0].valor_actual));
             setUnidad((data[0].unidad).toUpperCase());
