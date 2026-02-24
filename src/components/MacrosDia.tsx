@@ -35,8 +35,6 @@ export default function MacrosDia() {
             return
         }
 
-        console.log(data)
-
         let perCarbohidratos = data[0].carbohidratos ? (Number(data[0].carbohidratos) * 4 / data[0].kcal) * 100 : 0;
         let perProteinas = data[0].proteina ? (Number(data[0].proteina) * 4 / data[0].kcal) * 100 : 0;
         let perGrasas = data[0].grasas ? (Number(data[0].grasas) * 9 / data[0].kcal) * 100 : 0;
