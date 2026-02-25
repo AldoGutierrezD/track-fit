@@ -54,7 +54,7 @@ export default function Dashboard() {
     }
 
     return (
-        <section>
+        <section className="flex-1 p-4">
             <h1 className="font-against text-2xl mt-6">Hola, Aldo!</h1>
             <h4 className="font-brule text-base font-light">Espero que tengas un excelente {day}</h4>
 
