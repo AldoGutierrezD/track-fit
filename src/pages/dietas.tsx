@@ -71,7 +71,7 @@ export default function Sesiones() {
             { id_usuariod: user.id }
         );
 
-        if (error) {
+        if (error || data.length == 0) {
             Swal.fire({
                 icon: "error",
                 title: "Error",
@@ -80,7 +80,7 @@ export default function Sesiones() {
             return
         }
 
-        setDietaId(data[0].id);
+        setDietaId(data[0].id ?? 0);
         setDietaProteina(data[0].proteina ?? 0);
         setDietaCarbohidratos(data[0].carbohidratos ?? 0);
         setDietaGrasas(data[0].grasas ?? 0);
@@ -676,7 +676,6 @@ export default function Sesiones() {
                                             <td className="whitespace-nowrap p-2">
                                                 <input
                                                     type="number"
-                                                    min="1"
                                                     value={e.cantidad}
                                                     placeholder="1"
                                                     onChange={(ev) => updateIngrediente(e.id, "cantidad", ev.target.value === "" ? "" : Number(ev.target.value))}
