@@ -148,7 +148,10 @@ export default function Objetivos() {
     return (
         <MainLayout>
             <FullScreenLoader loading={loading} />
-            <h1 className="font-against text-2xl mt-6 mb-3">Nuevo objetivo</h1>
+            <div className="flex items-center gap-2 mt-6 mb-3">
+                <Goal size={28} />
+                <h1 className="font-against text-2xl">Objetivos establecidos</h1>
+            </div>
 
             <form onSubmit={handleSubmit}>
                 <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-3">

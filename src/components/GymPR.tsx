@@ -8,7 +8,7 @@ type Props = {
 export default function GymPR({ ejercicios }: Props) {
 
     return (
-        <div className="w-full grid grid-cols-8 sm:grid-cols-4 md:grid-cols-8 gap-3">
+        <div className="w-full grid grid-cols-6 lg:grid-cols-4 xl:grid-cols-8 gap-3">
             {
                 ejercicios.map((item, index) => {
                     let pr = (!item.peso_anterior || item.peso_anterior <= 0) ? 0 : (item.peso - item.peso_anterior);

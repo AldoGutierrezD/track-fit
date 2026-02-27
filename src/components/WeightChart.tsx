@@ -99,6 +99,23 @@ export default function ProgressChart() {
         },
     }
 
-    return <Line data={data} options={options} />
+    return (
+        <div className="w-full h-[350px]">
+            <Line
+                data={data}
+                options={{
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    animation: {
+                        duration: 1800,
+                        easing: "easeOutQuart"
+                    },
+                    plugins: {
+                        legend: { position: "bottom" }
+                    }
+                }}
+            />
+        </div>
+    );
 
 }

@@ -182,7 +182,10 @@ export default function Sesiones() {
     return (
         <MainLayout>
             <FullScreenLoader loading={loading} />
-            <h1 className="font-against text-2xl mt-6 mb-3">Nueva sesión</h1>
+            <div className="flex items-center gap-2 mt-6 mb-3">
+                <Calendar size={28} />
+                <h1 className="font-against text-2xl">Nueva sesión</h1>
+            </div>
 
             <form onSubmit={handleSubmit}>
                 <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-3">

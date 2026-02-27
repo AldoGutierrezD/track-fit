@@ -16,7 +16,7 @@ export default function ItemGymPR({ image, exercise, weight, reps, date, pr }: I
     let days = Math.round(difference / (1000 * 3600 * 24));
 
     return (
-        <div className="relative w-full h-full">
+        <div className="relative w-full h-full col-span-2 lg:col-span-1">
             {
                 (pr > 0 && days <= 15) &&
                 <div className="absolute w-10 h-10 rounded-full bg-green-400 top-0 -right-3 z-10 flex justify-center items-center shadow-[0px_4px_6px_0px_rgba(0,_0,_0,_0.1)]">

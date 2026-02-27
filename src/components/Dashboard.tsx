@@ -54,20 +54,20 @@ export default function Dashboard() {
     }
 
     return (
-        <section className="flex-1 p-4">
+        <section>
             <h1 className="font-against text-2xl mt-6">Hola, Aldo!</h1>
             <h4 className="font-brule text-base font-light">Espero que tengas un excelente {day}</h4>
 
-            <section className="w-full grid grid-cols-3 gap-4 items-stretch mt-4">
-                <div>
+            <section className="w-full grid grid-cols-3 lg:grid-cols-4 xl:grid-cols-3 gap-4 items-stretch mt-4">
+                <div className="col-span-full lg:col-span-2 xl:col-span-1">
                     <h4 className="font-inter font-semibold text-lg mb-1">Macros del día</h4>
                     <MacrosDia />
                 </div>
-                <div>
+                <div className="col-span-full lg:col-span-2 xl:col-span-1">
                     <h4 className="font-inter font-semibold text-lg mb-1">Tu cuerpo hoy</h4>
                     <CuerpoHoy />
                 </div>
-                <div>
+                <div className="col-span-full lg:col-span-2 xl:col-span-1">
                     <h4 className="font-inter font-semibold text-lg mb-1">Objetivo principal</h4>
                     <Objetivo />
                 </div>
@@ -102,10 +102,10 @@ export default function Dashboard() {
             <section className="w-full mt-12">
                 <h4 className="font-inter font-semibold text-lg mb-1">Estadísticas</h4>
                 <div className="w-full grid grid-cols-3 gap-4 items-stretch">
-                    <div className="col-span-2">
+                    <div className="col-span-full xl:col-span-2">
                         <WeightChart />
                     </div>
-                    <div className="col-span-1">
+                    <div className="col-span-full xl:col-span-1">
                         <FatChart />
                         <BodyMassChart />
                     </div>

@@ -20,7 +20,7 @@ export default function ItemFood({ color, hour, name, carbs, protein, fat, ingre
     };
 
     return (
-        <div className={`flex flex-col h-full border-3 ${color} rounded-2xl p-2 shadow-[0px_5px_0px_0px_#000000]`}>
+        <div className={`col-span-full lg:col-span-2 xl:col-span-1 flex flex-col h-full border-3 ${color} rounded-2xl p-2 shadow-[0px_5px_0px_0px_#000000]`}>
             <div className="flex justify-between items-center">
                 <h5 className="font-inter font-semibold text-base">{name}</h5>
                 <span className="font-inter font-semibold text-base">{formatHour24(hour)}</span>

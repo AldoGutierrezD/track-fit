@@ -46,9 +46,9 @@ export default function Objetivo() {
     }, [valorActual]);
 
     return (
-        <div className="h-[90%] border-3 relative rounded-2xl flex justify-center items-center bg-gradient-to-t from-amber-50 to-amber-200 shadow-[0px_5px_0px_0px_#000000]">
+        <div className="h-[250px] lg:h-[90%] w-full max-w-[400px] border-3 relative rounded-2xl flex justify-center items-center bg-gradient-to-t from-amber-50 to-amber-200 shadow-[0px_5px_0px_0px_#000000]">
             <FullScreenLoader loading={loading} />
-            <span className='badge badge-info absolute bottom-3 left-1/2 -translate-x-1/2'>{objetivo}</span>
+            <span className='badge badge-info absolute bottom-3 left-1/2 -translate-x-1/2 text-sm lg:text-base'>{objetivo}</span>
             <div className="relative size-50 bottom-4">
                 <svg className="rotate-[135deg] size-full" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
                     <circle cx="18" cy="18" r="16" fill="none" className="stroke-current text-green-200 dark:text-green-200" stroke-width="1" stroke-dasharray="100 100" stroke-linecap="round"></circle>
