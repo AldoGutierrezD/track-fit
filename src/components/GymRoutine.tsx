@@ -8,6 +8,7 @@ import { RutinaEjercicio } from "@/types/interfaces"
 
 export default function GymRoutine() {
 
+    const [ultimaActualizacion, setUltimaActualizacion] = useState("");
     const [ejercicios, setEjercicios] = useState<RutinaEjercicio[]>([]);
     const [loading, setLoading] = useState(false);
 
@@ -52,6 +53,8 @@ export default function GymRoutine() {
 
         if (data.length <= 0) return
 
+        setUltimaActualizacion(data[0].created_at);
+
         const { data: dataEjercicios, error: errorEjercicios } = await supabase.rpc(
             "get_rutina_gym_ejercicios",
             { idd: data[0].id }
@@ -73,15 +76,16 @@ export default function GymRoutine() {
     if (ejercicios.length <= 0) return null;
 
     return (
-        <div className="w-full grid grid-cols-3 gap-2">
-            <div className="col-span-1">
+        <div className="w-full grid grid-cols-3 lg:grid-cols-4 xl:grid-cols-3 gap-2">
+            <div className="col-span-full lg:col-span-2 xl:col-span-1">
                 <img src="./images/chest-day.png" className="w-full h-auto rounded-2xl" alt="" />
-                <span className="flex items-center gap-2 my-4">
+                <span className="flex items-center gap-2 mt-4 mb-2">
                     <Dumbbell size={24} />
                     <h6 className="font-inter font-semibold">{musculos.join(", ")}</h6>
                 </span>
+                <span className="italic font-light text-sm text-[#959595]">Ultima módificacion {ultimaActualizacion.split("T")[0]}</span>
             </div>
-            <div className="col-span-2 grid grid-cols-2 gap-3">
+            <div className="col-span-full lg:col-span-2 xl:col-span-2 grid grid-cols-2 gap-3">
                 {
                     ejercicios.map((element, index) => (
                         <ItemGymRoutine
