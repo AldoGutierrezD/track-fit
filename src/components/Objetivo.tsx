@@ -51,9 +51,9 @@ export default function Objetivo() {
             <span className='badge badge-info absolute bottom-3 left-1/2 -translate-x-1/2 text-sm lg:text-base'>{objetivo}</span>
             <div className="relative size-50 bottom-4">
                 <svg className="rotate-[135deg] size-full" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="18" cy="18" r="16" fill="none" className="stroke-current text-green-200 dark:text-green-200" stroke-width="1" stroke-dasharray="100 100" stroke-linecap="round"></circle>
+                    <circle cx="18" cy="18" r="16" fill="none" className="stroke-current text-green-200 dark:text-green-200" strokeWidth="1" strokeDasharray="100 100" strokeLinecap="round"></circle>
 
-                    <circle cx="18" cy="18" r="16" fill="none" className="stroke-current text-green-400 green-400:text-dark" stroke-width="2" stroke-dasharray={`${porcentajeAvance} 100`} stroke-linecap="round"></circle>
+                    <circle cx="18" cy="18" r="16" fill="none" className="stroke-current text-green-400 green-400:text-dark" strokeWidth="2" strokeDasharray={`${porcentajeAvance} 100`} strokeLinecap="round"></circle>
                 </svg>
 
                 <div className="absolute top-1/2 start-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
