@@ -28,7 +28,7 @@ export default function ItemFood({ color, hour, name, carbs, protein, fat, ingre
             <div className="w-full mt-2">
                 {
                     ingredients.map((item, index) => (
-                        <div className="flex items-center gap-2 mb-1">
+                        <div key={index} className="flex items-center gap-2 mb-1">
                             <div className="square-icon square-icon-success">
                                 <Salad size={20} />
                             </div>
