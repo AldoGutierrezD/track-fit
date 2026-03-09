@@ -170,7 +170,7 @@ export default function Objetivos() {
                                 <option value="0">SELECCIONE</option>
                                 {
                                     mediciones.map((item) => (
-                                        <option value={item.id}>{item.nombre}</option>
+                                        <option key={item.id} value={item.id}>{item.nombre}</option>
                                     ))
                                 }
                             </select>
@@ -241,28 +241,30 @@ export default function Objetivos() {
                                 <th className="whitespace-nowrap p-2">Estatus</th>
                             </tr>
                         </thead>
-                        {
-                            objetivos.map(item => {
-                                let estatus = (item.estado == 1)
-                                    ? <span className='badge badge-success'>Activo</span>
-                                    : <span className='badge badge-danger'>Inactivo</span>;
+                        <tbody>
+                            {
+                                objetivos.map(item => {
+                                    let estatus = (item.estado == 1)
+                                        ? <span className='badge badge-success'>Activo</span>
+                                        : <span className='badge badge-danger'>Inactivo</span>;
 
-                                return (
-                                    <tr key={item.id}>
-                                        <td className="whitespace-nowrap p-2">
-                                            <input
-                                                type="checkbox"
-                                                checked={item.estado == 1}
-                                                onChange={(e) => handleChangeEstado(item.id, e.target.checked)}
-                                            />
-                                        </td>
-                                        <td className="whitespace-nowrap p-2">{item.medicion}</td>
-                                        <td className="whitespace-nowrap p-2">{item.descripcion}</td>
-                                        <td className="whitespace-nowrap p-2">{estatus}</td>
-                                    </tr>
-                                )
-                            })
-                        }
+                                    return (
+                                        <tr key={item.id}>
+                                            <td className="whitespace-nowrap p-2">
+                                                <input
+                                                    type="checkbox"
+                                                    checked={item.estado == 1}
+                                                    onChange={(e) => handleChangeEstado(item.id, e.target.checked)}
+                                                />
+                                            </td>
+                                            <td className="whitespace-nowrap p-2">{item.medicion}</td>
+                                            <td className="whitespace-nowrap p-2">{item.descripcion}</td>
+                                            <td className="whitespace-nowrap p-2">{estatus}</td>
+                                        </tr>
+                                    )
+                                })
+                            }
+                        </tbody>
                     </table>
                 </div>
             </div>
