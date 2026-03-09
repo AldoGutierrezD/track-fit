@@ -225,7 +225,7 @@ export default function Sesiones() {
                                                     type="number"
                                                     id={item.id}
                                                     name={item.id}
-                                                    value={valores[item.id]}
+                                                    value={valores[item.id] ?? ''}
                                                     min="0"
                                                     step="any"
                                                     onChange={(e) => setValores({ ...valores, [item.id]: e.target.value })}
@@ -282,23 +282,25 @@ export default function Sesiones() {
                                 <th className="whitespace-nowrap p-2">Fecha</th>
                                 {
                                     mediciones.map((item) => (
-                                        <th className="p-2">{item.nombre}</th>
+                                        <th className="p-2" key={item.id}>{item.nombre}</th>
                                     ))
                                 }
                             </tr>
                         </thead>
-                        {
-                            Object.entries(historial).map(([fecha, sesiones]) => (
-                                <tr>
-                                    <td className="whitespace-nowrap p-2">{fecha}</td>
-                                    {
-                                        sesiones.map(item => (
-                                            <td className="whitespace-nowrap p-2">{item.valor} {item.unidad}</td>
-                                        ))
-                                    }
-                                </tr>
-                            ))
-                        }
+                        <tbody>
+                            {
+                                Object.entries(historial).map(([fecha, sesiones]) => (
+                                    <tr key={fecha}>
+                                        <td className="whitespace-nowrap p-2">{fecha}</td>
+                                        {
+                                            sesiones.map(item => (
+                                                <td className="whitespace-nowrap p-2" key={item.medicion}>{item.valor} {item.unidad}</td>
+                                            ))
+                                        }
+                                    </tr>
+                                ))
+                            }
+                        </tbody>
                     </table>
                 </div>
             </div>
