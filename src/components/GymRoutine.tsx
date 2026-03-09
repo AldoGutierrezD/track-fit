@@ -10,6 +10,7 @@ export default function GymRoutine() {
 
     const [ultimaActualizacion, setUltimaActualizacion] = useState("");
     const [ejercicios, setEjercicios] = useState<RutinaEjercicio[]>([]);
+    //const [image, setImage] = useState("");
     const [loading, setLoading] = useState(false);
 
     const today = new Date();
@@ -25,6 +26,13 @@ export default function GymRoutine() {
         );
     }, [ejercicios]);
 
+    const image = useMemo(() => {
+        if (musculos.includes('PECHO')) return 'chest-day.webp';
+        if (musculos.includes('ESPALDA')) return 'back-day.webp';
+        if (musculos.includes('HOMBRO')) return 'shoulder-day.webp';
+        if (musculos.includes('PIERNA')) return 'leg-day.webp';
+        return null;
+    }, [musculos]);
 
     const getRutina = async () => {
 
@@ -78,7 +86,7 @@ export default function GymRoutine() {
     return (
         <div className="w-full grid grid-cols-3 lg:grid-cols-4 xl:grid-cols-3 gap-2">
             <div className="col-span-full lg:col-span-2 xl:col-span-1">
-                <img src="./images/chest-day.png" className="w-full h-auto rounded-2xl" alt="" />
+                <img src={`./images/${image}`} className="w-full h-56 object-cover rounded-2xl" alt="" />
                 <span className="flex items-center gap-2 mt-4 mb-2">
                     <Dumbbell size={24} />
                     <h6 className="font-inter font-semibold">{musculos.join(", ")}</h6>
