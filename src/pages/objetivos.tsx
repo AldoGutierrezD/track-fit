@@ -150,7 +150,7 @@ export default function Objetivos() {
             <FullScreenLoader loading={loading} />
             <div className="flex items-center gap-2 mt-6 mb-3">
                 <Goal size={28} />
-                <h1 className="font-against text-2xl">Objetivos establecidos</h1>
+                <h1 className="font-against text-lg lg:text-2xl">Objetivos establecidos</h1>
             </div>
 
             <form onSubmit={handleSubmit}>
@@ -231,7 +231,7 @@ export default function Objetivos() {
             </div>
 
             <div className="w-full">
-                <div className="w-2/3 overflow-auto bg-white-ft rounded-xl border-2">
+                <div className="w-full lg:w-2/3 overflow-auto bg-white-ft rounded-xl border-2">
                     <table className="text-center w-full">
                         <thead className="text-black bg-[#a3e4fa]">
                             <tr>

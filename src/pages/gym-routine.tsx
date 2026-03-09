@@ -243,7 +243,7 @@ export default function Objetivos() {
             <FullScreenLoader loading={loading} />
             <div className="flex items-center gap-2 mt-6 mb-3">
                 <Dumbbell size={28} />
-                <h1 className="font-against text-2xl">Rutinas del gimnasio</h1>
+                <h1 className="font-against text-lg lg:text-2xl">Rutinas del gimnasio</h1>
             </div>
 
             <form onSubmit={handleSubmit}>
@@ -375,13 +375,13 @@ export default function Objetivos() {
                 <h2 className="font-brule text-xl">Rutina actual</h2>
             </div>
 
-            <div className="w-full grid grid-cols-2 gap-4">
+            <div className="w-full grid grid-cols-2 gap-4 mb-30">
                 {
                     rutinas.map(item => {
                         let letter = item.dia.substring(0, 1);
 
                         return (
-                            <div key={item.id} className="w-full col-span-1 flex justify-start gap-2 rounded-xl p-2 border-3 relative bottom-shadow">
+                            <div key={item.id} className="w-full col-span-full lg:col-span-1 flex justify-start gap-2 rounded-xl p-2 border-3 relative bottom-shadow">
                                 <div>
                                     <div className="w-20 h-20 rounded-lg bg-[#fee685] flex justify-center items-center">
                                         <span className="text-4xl font-against">{letter}</span>

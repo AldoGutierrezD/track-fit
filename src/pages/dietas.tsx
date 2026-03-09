@@ -569,7 +569,7 @@ export default function Sesiones() {
             <div className="flex justify-between mt-6 mb-3">
                 <div className="flex items-center gap-2">
                     <Salad size={28} />
-                    <h1 className="font-against text-2xl">Planes alimenticios</h1>
+                    <h1 className="font-against text-lg lg:text-2xl">Planes alimenticios</h1>
                 </div>
 
                 <div>
@@ -750,98 +750,100 @@ export default function Sesiones() {
                 <h2 className="font-brule text-xl">Dieta actual</h2>
             </div>
 
-            <div className="w-full">
-                <table className="text-center w-full">
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th>Proteína</th>
-                            <th>Carbohidratos</th>
-                            <th>Grasas</th>
-                            <th>Kcal</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            dietaPlatillos.map(item => {
-                                return (
-                                    <tr key={item.id}>
-                                        <td className="whitespace-nowrap p-2">
-                                            <div className="flex items-center gap-2">
-                                                <button
-                                                    type="button"
-                                                    className="cursor-pointer"
-                                                    title="Eliminar registro"
-                                                    onClick={(e) => deleteDietaPlatillo(item.id)}
-                                                >
-                                                    <X size={20} className="text-red-500" />
-                                                </button>
-                                                <div className="square-icon-big square-icon-warning">
-                                                    <Salad size={24} />
+            <div className="w-full mb-30">
+                <div className="w-full overflow-auto">
+                    <table className="text-center w-full">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th>Proteína</th>
+                                <th>Carbohidratos</th>
+                                <th>Grasas</th>
+                                <th>Kcal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                dietaPlatillos.map(item => {
+                                    return (
+                                        <tr key={item.id}>
+                                            <td className="whitespace-nowrap p-2">
+                                                <div className="flex items-center gap-2">
+                                                    <button
+                                                        type="button"
+                                                        className="cursor-pointer"
+                                                        title="Eliminar registro"
+                                                        onClick={(e) => deleteDietaPlatillo(item.id)}
+                                                    >
+                                                        <X size={20} className="text-red-500" />
+                                                    </button>
+                                                    <div className="square-icon-big square-icon-warning">
+                                                        <Salad size={24} />
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </td>
-                                        <td className="whitespace-nowrap p-2">
-                                            <div className="mt-2">
-                                                <input
-                                                    type="time"
-                                                    name="horario"
-                                                    value={item.horario}
-                                                    onChange={(e) => updateDietaPlatilloHorario(item.id, e.target.value)}
-                                                    autoComplete="off"
-                                                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
-                                                />
-                                            </div>
-                                        </td>
-                                        <td>
-                                            {item.nombre}
-                                        </td>
-                                        <td>
-                                            {item.descripcion}
-                                        </td>
-                                        <td className="whitespace-nowrap p-2">
-                                            <span className="badge badge-success text-xs">
-                                                <Beef size={12} />
-                                                {item.proteina} gr
-                                            </span>
-                                        </td>
-                                        <td className="whitespace-nowrap p-2">
-                                            <span className="badge badge-info text-xs">
-                                                <Wheat size={12} />
-                                                {item.carbohidratos} gr
-                                            </span>
-                                        </td>
-                                        <td className="whitespace-nowrap p-2">
-                                            <span className="badge badge-danger text-xs">
-                                                <Droplet size={12} />
-                                                {item.grasas} gr
-                                            </span>
-                                        </td>
-                                        <td className="whitespace-nowrap p-2">
-                                            <span className="badge badge-warning text-xs">
-                                                <Droplet size={12} />
-                                                {item.kcal_totales} gr
-                                            </span>
-                                        </td>
-                                    </tr>
+                                            </td>
+                                            <td className="whitespace-nowrap p-2">
+                                                <div className="mt-2">
+                                                    <input
+                                                        type="time"
+                                                        name="horario"
+                                                        value={item.horario}
+                                                        onChange={(e) => updateDietaPlatilloHorario(item.id, e.target.value)}
+                                                        autoComplete="off"
+                                                        className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
+                                                    />
+                                                </div>
+                                            </td>
+                                            <td className="whitespace-nowrap p-2">
+                                                {item.nombre}
+                                            </td>
+                                            <td className="whitespace-nowrap p-2">
+                                                {item.descripcion}
+                                            </td>
+                                            <td className="whitespace-nowrap p-2">
+                                                <span className="badge badge-success text-xs">
+                                                    <Beef size={12} />
+                                                    {item.proteina} gr
+                                                </span>
+                                            </td>
+                                            <td className="whitespace-nowrap p-2">
+                                                <span className="badge badge-info text-xs">
+                                                    <Wheat size={12} />
+                                                    {item.carbohidratos} gr
+                                                </span>
+                                            </td>
+                                            <td className="whitespace-nowrap p-2">
+                                                <span className="badge badge-danger text-xs">
+                                                    <Droplet size={12} />
+                                                    {item.grasas} gr
+                                                </span>
+                                            </td>
+                                            <td className="whitespace-nowrap p-2">
+                                                <span className="badge badge-warning text-xs">
+                                                    <Droplet size={12} />
+                                                    {item.kcal_totales} gr
+                                                </span>
+                                            </td>
+                                        </tr>
 
-                                )
-                            })
-                        }
-                    </tbody>
-                    <tfoot>
-                        <tr className="font-bold">
-                            <td className="whitespace-nowrap p-2" colSpan={4}></td>
-                            <td className="whitespace-nowrap p-2">{dietaProteina.toFixed(2)}</td>
-                            <td className="whitespace-nowrap p-2">{dietaCarbohidratos.toFixed(2)}</td>
-                            <td className="whitespace-nowrap p-2">{dietaGrasas.toFixed(2)}</td>
-                            <td className="whitespace-nowrap p-2">{dietaKcal.toFixed(2)}</td>
-                        </tr>
-                    </tfoot>
-                </table>
+                                    )
+                                })
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr className="font-bold">
+                                <td className="whitespace-nowrap p-2" colSpan={4}></td>
+                                <td className="whitespace-nowrap p-2">{dietaProteina.toFixed(2)}</td>
+                                <td className="whitespace-nowrap p-2">{dietaCarbohidratos.toFixed(2)}</td>
+                                <td className="whitespace-nowrap p-2">{dietaGrasas.toFixed(2)}</td>
+                                <td className="whitespace-nowrap p-2">{dietaKcal.toFixed(2)}</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
             </div>
         </MainLayout>
     )

@@ -184,7 +184,7 @@ export default function Sesiones() {
             <FullScreenLoader loading={loading} />
             <div className="flex items-center gap-2 mt-6 mb-3">
                 <Calendar size={28} />
-                <h1 className="font-against text-2xl">Nueva sesión</h1>
+                <h1 className="font-against text-lg lg:text-2xl">Nueva sesión</h1>
             </div>
 
             <form onSubmit={handleSubmit}>
@@ -274,7 +274,7 @@ export default function Sesiones() {
                 <h2 className="font-brule text-xl">Historial de sesiones</h2>
             </div>
 
-            <div className="w-full">
+            <div className="w-full mb-30">
                 <div className="w-full overflow-auto bg-white-ft rounded-xl border-2">
                     <table className="text-center">
                         <thead className="text-black bg-[#a3e4fa]">
