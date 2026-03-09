@@ -111,6 +111,11 @@ export default function Dashboard() {
                     </div>
                 </div>
             </section>
+
+            <div className="mt-10 mb-30 w-full text-center md:hidden">
+                <span className="font-against text-xs">Nadie sabe lo que va a pasar mañana, por eso lo hago hoy</span>
+            </div>
+
         </section>
     )
 }
