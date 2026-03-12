@@ -99,15 +99,20 @@ export default function Diet() {
                     ))
                 }
             </div>
-            <div className="w-full mt-4 border-3 border-amber-500 rounded-2xl p-2 flex gap-2 bg-amber-100">
-                <div>
-                    <Info className="text-amber-500 size-8" />
-                </div>
-                <p>{observaciones}</p>
-            </div>
-            <div className="text-right mt-2">
-                <span className="italic font-light text-sm text-[#959595]">Ultima módificacion {ultimaActualizacion.split(" ")[0]}</span>
-            </div>
+            {
+                observaciones.length > 0 &&
+                <>
+                    <div className="w-full mt-4 border-3 border-amber-500 rounded-2xl p-2 flex gap-2 bg-amber-100">
+                        <div>
+                            <Info className="text-amber-500 size-8" />
+                        </div>
+                        <p>{observaciones}</p>
+                    </div>
+                    <div className="text-right mt-2">
+                        <span className="italic font-light text-sm text-[#959595]">Ultima módificacion {ultimaActualizacion.split(" ")[0]}</span>
+                    </div>
+                </>
+            }
         </div>
     )
 }
