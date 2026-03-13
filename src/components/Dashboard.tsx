@@ -27,38 +27,38 @@ export default function Dashboard() {
     const [loading, setLoading] = useState(false);
 
 
-    useEffect(() => {
-        getEjerciciosPR();
-    }, []);
+    // useEffect(() => {
+    //     getEjerciciosPR();
+    // }, []);
 
 
-    const getEjerciciosPR = async () => {
+    // const getEjerciciosPR = async () => {
 
-        setLoading(true);
+    //     setLoading(true);
 
-        const { data: { user } } = await supabase.auth.getUser();
+    //     const { data: { user } } = await supabase.auth.getUser();
 
-        if (!user) return
+    //     if (!user) return
 
-        const { data, error } = await supabase.rpc(
-            "get_ejercicios_gym_pr",
-            { id_usuariod: user.id }
-        );
+    //     const { data, error } = await supabase.rpc(
+    //         "get_ejercicios_gym_pr",
+    //         { id_usuariod: user.id }
+    //     );
 
-        if (!error) {
-            setEjerciciosPR(data);
-        }
+    //     if (!error) {
+    //         setEjerciciosPR(data);
+    //     }
 
-        setLoading(false);
+    //     setLoading(false);
 
-    }
+    // }
 
     return (
         <section>
             <h1 className="font-against text-2xl mt-6">Hola, Aldo!</h1>
             <h4 className="font-brule text-base font-light">Espero que tengas un excelente {day}</h4>
 
-            <section className="w-full grid grid-cols-3 lg:grid-cols-4 xl:grid-cols-3 gap-4 items-stretch mt-4">
+            {/* <section className="w-full grid grid-cols-3 lg:grid-cols-4 xl:grid-cols-3 gap-4 items-stretch mt-4">
                 <div className="col-span-full lg:col-span-2 xl:col-span-1">
                     <h4 className="font-inter font-semibold text-lg mb-1">Macros del día</h4>
                     <MacrosDia />
@@ -110,7 +110,7 @@ export default function Dashboard() {
                         <BodyMassChart />
                     </div>
                 </div>
-            </section>
+            </section> */}
 
             <div className="mt-10 mb-30 w-full text-center md:hidden">
                 <span className="font-against text-xs">Nadie sabe lo que va a pasar mañana, por eso lo hago hoy</span>
