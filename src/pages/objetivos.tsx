@@ -1,4 +1,5 @@
 import MainLayout from "@/layouts/MainLayout";
+import { useAuth } from "@/context/AuthContext";
 import { useState, useEffect, FormEvent } from "react";
 import { Medicion, Objetivo } from "@/types/interfaces";
 import { supabase } from "@/lib/supabase";
@@ -8,30 +9,25 @@ import FullScreenLoader from "@/components/LoadingOverlay";
 
 export default function Objetivos() {
 
+    const { user, loading } = useAuth();
     const [idMedicion, setIdMedicion] = useState("");
     const [nombre, setNombre] = useState("");
     const [valor, setValor] = useState("");
     const [mediciones, setMediciones] = useState<Medicion[]>([]);
     const [objetivos, setObjetivos] = useState<Objetivo[]>([]);
     const [refreshHistorial, setRefreshHistorial] = useState(0);
-    const [loading, setLoading] = useState(false);
     const [loadingSave, setLoadingSave] = useState(false);
 
 
     useEffect(() => {
+        if (!user) return;
         getMediciones();
-        getObjetivos();
-    }, [refreshHistorial]);
+        getObjetivos(user.id);
+    }, [refreshHistorial, user]);
 
 
     //PARAMETROS A MEDIR
     const getMediciones = async () => {
-
-        setLoading(true);
-
-        const { data: { user } } = await supabase.auth.getUser();
-
-        if (!user) return;
 
         const { data, error } = await supabase.rpc(
             "get_mediciones"
@@ -41,20 +37,15 @@ export default function Objetivos() {
             setMediciones(data || []);
         }
 
-        setLoading(false);
     }
 
 
     //OBJETIVOS
-    const getObjetivos = async () => {
-
-        const { data: { user } } = await supabase.auth.getUser();
-
-        if (!user) return;
+    const getObjetivos = async (userId: string) => {
 
         const { data, error } = await supabase.rpc(
             "get_objetivos",
-            { id_usuariod: user.id }
+            { id_usuariod: userId }
         );
 
         if (!error) {
@@ -68,8 +59,6 @@ export default function Objetivos() {
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setLoadingSave(true);
-
-        const { data: { user } } = await supabase.auth.getUser();
 
         if (!user) return;
 
@@ -105,8 +94,6 @@ export default function Objetivos() {
 
     //ACTUALIZAR ESTADO DEL OBJETIVO
     const handleChangeEstado = async (idObjetivo: string, checked: boolean) => {
-
-        const { data: { user } } = await supabase.auth.getUser();
 
         if (!user) return;
 
