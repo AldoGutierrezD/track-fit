@@ -33,8 +33,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             }
 
             const { data: { user }, error } = await supabase.auth.getUser();
-            console.log("USER:", user);
-            console.log("ERROR:", error);
             setUser(user);
             setLoading(false);
         }
