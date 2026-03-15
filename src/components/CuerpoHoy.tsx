@@ -1,33 +1,29 @@
 import { useState, useEffect } from "react"
+import { useAuth } from "@/context/AuthContext";
 import { supabase } from "@/lib/supabase";
 import ItemCuerpoHoy from "./ItemCuerpoHoy";
 import FullScreenLoader from "./LoadingOverlay";
 
 export default function CuerpoHoy() {
 
+    const { user, loading } = useAuth();
     const [peso, setPeso] = useState(0);
     const [masa, setMasa] = useState(0);
     const [grasa, setGrasa] = useState(0);
     const [brazo, setBrazo] = useState(0);
-    const [loading, setLoading] = useState(false);
 
 
     useEffect(() => {
-        getEstadisticas();
-    }, []);
-
-
-    const getEstadisticas = async () => {
-
-        setLoading(true);
-
-        const { data: { user } } = await supabase.auth.getUser();
-
         if (!user) return;
+        getEstadisticas(user.id);
+    }, [user]);
+
+
+    const getEstadisticas = async (userId: string) => {
 
         const { data, error } = await supabase.rpc(
             "get_sesion_medicion_ultima",
-            { id_usuariod: user.id }
+            { id_usuariod: userId }
         );
 
         if (!error && data.length > 0) {
@@ -36,8 +32,6 @@ export default function CuerpoHoy() {
             setGrasa(data[0].grasa ?? 0);
             setBrazo(data[0].brazo ?? 0);
         }
-
-        setLoading(false);
 
     }
 

@@ -63,14 +63,14 @@ export default function Dashboard() {
                     <h4 className="font-inter font-semibold text-lg mb-1">Macros del día</h4>
                     <MacrosDia />
                 </div>
-                {/* <div className="col-span-full lg:col-span-2 xl:col-span-1">
+                <div className="col-span-full lg:col-span-2 xl:col-span-1">
                     <h4 className="font-inter font-semibold text-lg mb-1">Tu cuerpo hoy</h4>
                     <CuerpoHoy />
                 </div>
                 <div className="col-span-full lg:col-span-2 xl:col-span-1">
                     <h4 className="font-inter font-semibold text-lg mb-1">Objetivo principal</h4>
                     <Objetivo />
-                </div> */}
+                </div>
             </section>
 
             {/* <section className="w-full grid grid-cols-3 gap-4 mt-8">

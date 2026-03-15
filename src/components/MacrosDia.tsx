@@ -9,7 +9,6 @@ export default function MacrosDia() {
     const [proteinas, setProteinas] = useState(0);
     const [grasas, setGrasas] = useState(0);
     const [kcal, setKcal] = useState(0);
-    //const [loading, setLoading] = useState(false);
     const { user, loading } = useAuth();
 
     useEffect(() => {
@@ -18,12 +17,6 @@ export default function MacrosDia() {
     }, [user]);
 
     const getMacros = async (userId: string) => {
-
-        // setLoading(true);
-
-        // const { data: { user } } = await supabase.auth.getUser();
-
-        //if (!user) return;
 
         const { data, error } = await supabase.rpc(
             "get_usuario_macros",
@@ -46,8 +39,6 @@ export default function MacrosDia() {
         setProteinas(perProteinas);
         setGrasas(perGrasas);
         setKcal(Number(data[0].kcal) || 0);
-
-        //setLoading(false);
 
     }
 

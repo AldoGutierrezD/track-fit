@@ -1,31 +1,27 @@
 import { useState, useEffect, useMemo } from "react";
+import { useAuth } from "@/context/AuthContext";
 import { supabase } from "@/lib/supabase";
 import FullScreenLoader from "./LoadingOverlay";
 
 export default function Objetivo() {
 
+    const { user, loading } = useAuth();
     const [valorActual, setValorActual] = useState(0);
     const [valorObjetivo, setValorObjetivo] = useState(0);
     const [unidad, setUnidad] = useState("");
     const [nombreUnidad, setNombreUnidad] = useState("");
     const [objetivo, setObjetivo] = useState("Sin definir");
-    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        getValores();
-    }, []);
-
-    const getValores = async () => {
-
-        setLoading(true);
-
-        const { data: { user } } = await supabase.auth.getUser();
-
         if (!user) return;
+        getValores(user.id);
+    }, [user]);
+
+    const getValores = async (userId: string) => {
 
         const { data, error } = await supabase.rpc(
             "get_objetivo_actual",
-            { id_usuariod: user.id }
+            { id_usuariod: userId }
         );
 
         if (!error && data.length > 0) {
@@ -35,8 +31,6 @@ export default function Objetivo() {
             setNombreUnidad(data[0].nombre_unidad);
             setObjetivo(data[0].objetivo);
         }
-
-        setLoading(false);
 
     }
 
