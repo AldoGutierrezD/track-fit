@@ -16,13 +16,20 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     useEffect(() => {
 
-        supabase.auth.getUser().then(({ data: { user }, error }) => {
-            console.log("USER:", user);
-            console.log("ERROR:", error);
-            console.log("SUPABASE URL:", process.env.NEXT_PUBLIC_SUPABASE_URL);
+        const initAuth = async () => {
+
+            const { data: { session } } = await supabase.auth.getSession();
+
+            if (!session) {
+                await fetch("/api/auth/login", { method: "POST" });
+            }
+
+            const { data: { user } } = await supabase.auth.getUser();
             setUser(user);
             setLoading(false);
-        });
+        }
+
+        initAuth();
 
         const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
             setUser(session?.user ?? null);
