@@ -378,7 +378,7 @@ export default function Objetivos() {
                                         {
                                             item.ejercicios.map((e, index) => (
                                                 <div key={index} className="flex gap-3">
-                                                    <div className="square-icon-big square-icon-success">
+                                                    <div className="square-icon-big square-icon-success shrink-0">
                                                         <Dumbbell size={24} />
                                                     </div>
                                                     <div>
