@@ -1,4 +1,5 @@
 import MainLayout from "@/layouts/MainLayout";
+import { useAuth } from "@/context/AuthContext";
 import { FormEvent, useState, useEffect } from "react";
 import { Medicion, SesionMedicionRow } from "@/types/interfaces";
 import { supabase } from "@/lib/supabase";
@@ -11,30 +12,25 @@ export default function Sesiones() {
 
     const currentDate = new Date().toISOString().split('T')[0];
 
+    const { user, loading } = useAuth();
     const [fecha, setFecha] = useState(currentDate);
     const [mediciones, setMediciones] = useState<Medicion[]>([]);
     const [historial, setHistorial] = useState<Record<string, SesionMedicionRow[]>>({});
     const [refreshHistorial, setRefreshHistorial] = useState(0);
     const [observaciones, setObservaciones] = useState("");
     const [valores, setValores] = useState<Record<string, string>>({});
-    const [loading, setLoading] = useState(false);
     const [loadingSave, setLoadingSave] = useState(false);
 
 
     useEffect(() => {
+        if (!user) return;
         getMediciones();
-        getHistorial();
-    }, [refreshHistorial]);
+        getHistorial(user.id);
+    }, [refreshHistorial, user]);
 
 
     //PARAMETROS A MEDIR
     const getMediciones = async () => {
-
-        setLoading(true);
-
-        const { data: { user } } = await supabase.auth.getUser();
-
-        if (!user) return;
 
         const { data, error } = await supabase.rpc(
             "get_mediciones"
@@ -44,21 +40,16 @@ export default function Sesiones() {
             setMediciones(data || []);
         }
 
-        setLoading(false);
     }
 
 
     //HISTORIAL
-    const getHistorial = async () => {
-
-        const { data: { user } } = await supabase.auth.getUser();
-
-        if (!user) return
+    const getHistorial = async (userId: string) => {
 
         const { data, error } = await supabase.rpc(
             "get_sesiones_mediciones",
             {
-                id_usuariod: user.id
+                id_usuariod: userId
             }
         );
 
