@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useAuth } from "@/context/AuthContext";
 import { supabase } from "@/lib/supabase";
 import FullScreenLoader from "./LoadingOverlay";
 
@@ -8,23 +9,25 @@ export default function MacrosDia() {
     const [proteinas, setProteinas] = useState(0);
     const [grasas, setGrasas] = useState(0);
     const [kcal, setKcal] = useState(0);
-    const [loading, setLoading] = useState(false);
+    //const [loading, setLoading] = useState(false);
+    const { user, loading } = useAuth();
 
     useEffect(() => {
-        getMacros();
-    }, []);
-
-    const getMacros = async () => {
-
-        setLoading(true);
-
-        const { data: { user } } = await supabase.auth.getUser();
-
         if (!user) return;
+        getMacros(user.id);
+    }, [user]);
+
+    const getMacros = async (userId: string) => {
+
+        // setLoading(true);
+
+        // const { data: { user } } = await supabase.auth.getUser();
+
+        //if (!user) return;
 
         const { data, error } = await supabase.rpc(
             "get_usuario_macros",
-            { id_usuariod: user.id }
+            { id_usuariod: userId }
         )
 
         if (error || !data) {
@@ -44,7 +47,7 @@ export default function MacrosDia() {
         setGrasas(perGrasas);
         setKcal(Number(data[0].kcal) || 0);
 
-        setLoading(false);
+        //setLoading(false);
 
     }
 
