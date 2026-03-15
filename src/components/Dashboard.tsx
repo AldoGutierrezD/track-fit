@@ -93,7 +93,7 @@ export default function Dashboard() {
                 </div>
             </section>
 
-            {/* <section className="w-full mt-12">
+            <section className="w-full mt-12">
                 <h4 className="font-inter font-semibold text-lg mb-1">Estadísticas</h4>
                 <div className="w-full grid grid-cols-3 gap-4 items-stretch">
                     <div className="col-span-full xl:col-span-2">
@@ -104,7 +104,7 @@ export default function Dashboard() {
                         <BodyMassChart />
                     </div>
                 </div>
-            </section> */}
+            </section>
 
             <div className="mt-10 mb-30 w-full text-center md:hidden">
                 <span className="font-against text-xs">Nadie sabe lo que va a pasar mañana, por eso lo hago hoy</span>

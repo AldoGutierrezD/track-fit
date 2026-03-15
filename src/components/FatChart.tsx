@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useAuth } from "@/context/AuthContext";
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Tooltip, Legend, Filler } from "chart.js";
 import { Line } from "react-chartjs-2";
 import { supabase } from "@/lib/supabase";
@@ -22,24 +23,22 @@ type Props = {
 export default function ProgressChart() {
 
     const MESES = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
+    const { user, loading } = useAuth();
     const [labels, setLabels] = useState<string[]>([]);
     const [values, setValues] = useState<number[]>([]);
 
 
     useEffect(() => {
-        getData();
-    }, []);
-
-
-    const getData = async () => {
-
-        const { data: { user } } = await supabase.auth.getUser();
-
         if (!user) return;
+        getData(user.id);
+    }, [user]);
+
+
+    const getData = async (userId: string) => {
 
         const { data, error } = await supabase.rpc(
             "get_usuario_progreso",
-            { id_usuariod: user.id }
+            { id_usuariod: userId }
         );
 
         if (error) {
