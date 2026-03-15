@@ -1,35 +1,31 @@
 import { useState, useEffect } from "react"
+import { useAuth } from "@/context/AuthContext";
 import { supabase } from "@/lib/supabase"
 import FullScreenLoader from "./LoadingOverlay";
 
 export default function RightBar() {
 
+    const { user, loading } = useAuth();
     const [nombre, setNombre] = useState("");
     const [edad, setEdad] = useState("");
     const [estatura, setEstatura] = useState("");
     const [peso, setPeso] = useState("");
     const [diaProximaSesion, setDiaProximaSesion] = useState("");
     const [mesProximaSesion, setMesProximaSesion] = useState("");
-    const [loading, setLoading] = useState(false);
     const MESES = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
 
     useEffect(() => {
-        obtenerDatos();
-        getUltimaSesion();
-    }, []);
-
-
-    const obtenerDatos = async () => {
-
-        setLoading(true);
-
-        const { data: { user } } = await supabase.auth.getUser();
-
         if (!user) return;
+        obtenerDatos(user.id);
+        getUltimaSesion(user.id);
+    }, [user]);
+
+
+    const obtenerDatos = async (userId: string) => {
 
         const { data, error } = await supabase.rpc(
             "get_usuario",
-            { idd: user.id }
+            { idd: userId }
         );
 
         if (!error) {
@@ -39,22 +35,14 @@ export default function RightBar() {
             setPeso(data[0].peso);
         }
 
-        setLoading(false);
-
     }
 
 
-    const getUltimaSesion = async () => {
-
-        setLoading(true);
-
-        const { data: { user } } = await supabase.auth.getUser();
-
-        if (!user) return;
+    const getUltimaSesion = async (userId: string) => {
 
         const { data, error } = await supabase.rpc(
             "get_sesion_ultima",
-            { id_usuariod: user.id }
+            { id_usuariod: userId }
         );
 
         if (!error) {
@@ -66,8 +54,6 @@ export default function RightBar() {
             setDiaProximaSesion(day);
             setMesProximaSesion(month);
         }
-
-        setLoading(false);
 
     }
 
