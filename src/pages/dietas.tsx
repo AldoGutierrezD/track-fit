@@ -1,4 +1,5 @@
 import MainLayout from "@/layouts/MainLayout";
+import { useAuth } from "@/context/AuthContext";
 import { FormEvent, useState, useEffect, useMemo } from "react";
 import { supabase } from "@/lib/supabase";
 import { Modal } from "@/components/Modal";
@@ -11,6 +12,7 @@ import FullScreenLoader from "@/components/LoadingOverlay";
 
 export default function Sesiones() {
 
+    const { user, loading } = useAuth();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [ingredientes, setIngredientes] = useState<IngredienteOption[]>([]);
     const [ingredienteSeleccionado, setIngredienteSeleccionado] = useState<IngredienteOption | null>(null);
@@ -25,8 +27,8 @@ export default function Sesiones() {
     const [dietaGrasas, setDietaGrasas] = useState<Number>(0);
     const [dietaKcal, setDietaKcal] = useState<Number>(0);
     const [activo, setActivo] = useState(false);
+    const [loadingInfo, setLoadingInfo] = useState(false);
     const [refreshDieta, setRefreshDieta] = useState(0);
-    const [loading, setLoading] = useState(false);
     const [loadingSave, setLoadingSave] = useState(false);
 
 
@@ -37,14 +39,13 @@ export default function Sesiones() {
 
 
     useEffect(() => {
-        getDieta();
-    }, [refreshDieta])
+        if (!user) return;
+        getDieta(user.id);
+    }, [refreshDieta, user])
 
 
     //UNIDADES
     const getUnidades = async () => {
-
-        setLoading(true);
 
         const { data, error } = await supabase.rpc(
             "get_unidades_ingredientes"
@@ -52,23 +53,15 @@ export default function Sesiones() {
 
         setUnidades(data);
 
-        setLoading(false);
-
     }
 
 
     //DIETA
-    const getDieta = async () => {
-
-        setLoading(true);
-
-        const { data: { user } } = await supabase.auth.getUser();
-
-        if (!user) return;
+    const getDieta = async (userId: string) => {
 
         const { data, error } = await supabase.rpc(
             "get_dieta",
-            { id_usuariod: user.id }
+            { id_usuariod: userId }
         );
 
         if (error || data.length == 0) {
@@ -102,8 +95,6 @@ export default function Sesiones() {
 
         setDietaPlatillos(dataDietaPlatillos);
 
-        setLoading(false);
-
     }
 
 
@@ -115,7 +106,7 @@ export default function Sesiones() {
 
     const selectPlatillo = async (id: string) => {
 
-        setLoading(true);
+        setLoadingInfo(true);
 
         //ENCABEZADO
         //#region
@@ -182,15 +173,13 @@ export default function Sesiones() {
         })
         //#endregion
 
-        setLoading(false);
+        setLoadingInfo(false);
 
     }
 
 
     //INGREDIENTES
     const getIngredientes = async () => {
-
-        setLoading(true);
 
         const { data, error } = await supabase.rpc(
             "get_ingredientes"
@@ -210,8 +199,6 @@ export default function Sesiones() {
                 gramos_por_unidad: e.gramos_por_unidad
             }))
         );
-
-        setLoading(false);
 
     }
 
@@ -384,8 +371,6 @@ export default function Sesiones() {
 
         e.preventDefault();
         setLoadingSave(true);
-
-        const { data: { user } } = await supabase.auth.getUser();
 
         if (!user) return;
 
@@ -566,6 +551,7 @@ export default function Sesiones() {
     return (
         <MainLayout>
             <FullScreenLoader loading={loading} />
+            <FullScreenLoader loading={loadingInfo} />
             <div className="flex justify-between mt-6 mb-3">
                 <div className="flex items-center gap-2">
                     <Salad size={28} />
