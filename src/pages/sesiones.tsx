@@ -90,8 +90,6 @@ export default function Sesiones() {
         e.preventDefault();
         setLoadingSave(true);
 
-        const { data: { user } } = await supabase.auth.getUser();
-
         if (!user) return
 
         //ENCABEZADO DE LA SESION
