@@ -10,7 +10,7 @@ export default function LeftBar() {
 
     return (
         <aside className="fixed bottom-5 w-full h-auto p-2 z-10 flex justify-center md:block md:w-24 md:h-screen md:sticky md:top-0 md:p-4">
-            <nav className="w-fit md:w-full h-full shadow-2xl flex md:flex-col justify-center md:justify-start items-center gap-4 md:gap-2 bg-foreground rounded-[35px] md:rounded-2xl py-2 px-6 md:p-2">
+            <nav className="w-fit md:w-full h-full shadow-2xl flex md:flex-col justify-center md:justify-start items-center gap-2 bg-foreground rounded-[35px] md:rounded-2xl py-2 px-6 md:p-2">
                 <Link href="/" className="font-against text-white text-3xl my-3">A</Link>
                 <div className="bg-slate-800 w-12 h-12 rounded-lg md:hidden">
                     <button type="button" title="Perfil" className="w-full h-full flex justify-center items-center text-yellow-300" onClick={() => setIsModalOpen(true)}>
