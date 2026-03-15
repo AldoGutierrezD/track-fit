@@ -24,7 +24,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                 await fetch("/api/auth/login", { method: "POST" });
             }
 
-            const { data: { user } } = await supabase.auth.getUser();
+            const { data: { user }, error } = await supabase.auth.getUser();
+            console.log("USER:", user);
+            console.log("ERROR:", error);
+            console.log("SUPABASE URL:", process.env.NEXT_PUBLIC_SUPABASE_URL);
             setUser(user);
             setLoading(false);
         }
