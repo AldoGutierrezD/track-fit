@@ -1,4 +1,5 @@
 import { useState, useEffect, FormEvent } from "react";
+import { useAuth } from "@/context/AuthContext";
 import { supabase } from "@/lib/supabase";
 import { Calendar, Dumbbell, RotateCw, X, Weight, Save } from "lucide-react";
 import { EjercicioGymOptions } from "@/types/interfaces";
@@ -18,6 +19,7 @@ export default function ModalPR({ onSuccess, refreshData }: Props) {
 
     const currentDate = new Date().toISOString().split('T')[0];
 
+    const { user, loading } = useAuth();
     const [ejercicios, setEjercicios] = useState<EjercicioGymOptions[]>([]);
     const [ejercicio, setEjercicio] = useState<number | null>(null);
     const [fecha, setFecha] = useState(currentDate);
@@ -25,7 +27,6 @@ export default function ModalPR({ onSuccess, refreshData }: Props) {
     const [reps, setReps] = useState("");
     const [peso, setPeso] = useState("");
     const [errors, setErrors] = useState({});
-    const [loading, setLoading] = useState(false);
     const [loadingSave, setLoadingSave] = useState(false);
 
 
@@ -36,12 +37,6 @@ export default function ModalPR({ onSuccess, refreshData }: Props) {
 
     //EJERCICIOS
     const getEjercicios = async () => {
-
-        setLoading(true);
-
-        const { data: { user } } = await supabase.auth.getUser();
-
-        if (!user) return;
 
         const { data, error } = await supabase.rpc(
             "get_ejercicios_gym"
@@ -60,7 +55,6 @@ export default function ModalPR({ onSuccess, refreshData }: Props) {
             )
         }
 
-        setLoading(false);
     }
 
 
@@ -86,8 +80,6 @@ export default function ModalPR({ onSuccess, refreshData }: Props) {
 
         setErrors({});
         setLoadingSave(true);
-
-        const { data: { user } } = await supabase.auth.getUser();
 
         if (!user) return;
 
