@@ -21,13 +21,20 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             const { data: { session } } = await supabase.auth.getSession();
 
             if (!session) {
-                await fetch("/api/auth/login", { method: "POST" });
+                const res = await fetch("/api/auth/login", { method: "POST" });
+                const { session: newSession } = await res.json();
+
+                if (newSession) {
+                    await supabase.auth.setSession({
+                        access_token: newSession.access_token,
+                        refresh_token: newSession.refresh_token
+                    });
+                }
             }
 
             const { data: { user }, error } = await supabase.auth.getUser();
             console.log("USER:", user);
             console.log("ERROR:", error);
-            console.log("SUPABASE URL:", process.env.NEXT_PUBLIC_SUPABASE_URL);
             setUser(user);
             setLoading(false);
         }
