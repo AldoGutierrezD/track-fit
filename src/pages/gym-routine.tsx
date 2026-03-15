@@ -1,4 +1,5 @@
 import MainLayout from "@/layouts/MainLayout";
+import { useAuth } from "@/context/AuthContext";
 import { useState, useEffect, FormEvent } from "react";
 import { EjercicioGymOptions, Rutina } from "@/types/interfaces";
 import { supabase } from "@/lib/supabase";
@@ -10,36 +11,31 @@ import FullScreenLoader from "@/components/LoadingOverlay";
 
 export default function Objetivos() {
 
+    const { user, loading } = useAuth();
     const [rutinas, setRutinas] = useState<Rutina[]>([]);
     const [ejercicios, setEjercicios] = useState<EjercicioGymOptions[]>([]);
     const [dia, setDia] = useState<number>(0);
     const [ejercicioSeleccionado, setEjercicioSeleccionado] = useState<EjercicioGymOptions | null>(null);
     const [tablaEjercicios, setTablaEjercicio] = useState<EjercicioGymOptions[]>([]);
     const [refreshHistorial, setRefreshHistorial] = useState(0);
-    const [loading, setLoading] = useState(false);
     const [loadingSave, setLoadingSave] = useState(false);
     const [errors, setErrors] = useState({});
     const dias = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
 
     useEffect(() => {
+        if (!user) return;
         getEjercicios();
-        getRutinas();
-    }, [refreshHistorial]);
+        getRutinas(user.id);
+    }, [refreshHistorial, user]);
 
 
     //RUTINAS ACTUALES
-    const getRutinas = async () => {
-
-        setLoading(true);
-
-        const { data: { user } } = await supabase.auth.getUser();
-
-        if (!user) return;
+    const getRutinas = async (userId: string) => {
 
         const { data, error } = await supabase.rpc(
             "get_rutinas_gym",
             {
-                id_usuariod: user.id
+                id_usuariod: userId
             }
         )
 
@@ -69,19 +65,11 @@ export default function Objetivos() {
 
         setRutinas(getRutinaEjercicios);
 
-        setLoading(false);
-
     }
 
 
     //EJERCICIOS
     const getEjercicios = async () => {
-
-        setLoading(true);
-
-        const { data: { user } } = await supabase.auth.getUser();
-
-        if (!user) return;
 
         const { data, error } = await supabase.rpc(
             "get_ejercicios_gym"
@@ -97,7 +85,6 @@ export default function Objetivos() {
             )
         }
 
-        setLoading(false);
     }
 
 
@@ -162,8 +149,6 @@ export default function Objetivos() {
 
         setErrors({});
         setLoadingSave(true);
-
-        const { data: { user } } = await supabase.auth.getUser();
 
         if (!user) return;
 
