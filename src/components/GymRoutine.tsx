@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo } from "react"
+import { useAuth } from "@/context/AuthContext"
 import { supabase } from "@/lib/supabase"
 import ItemGymRoutine from "./ItemGymRoutine"
 import { Dumbbell } from "lucide-react"
@@ -8,17 +9,17 @@ import { RutinaEjercicio } from "@/types/interfaces"
 
 export default function GymRoutine() {
 
+    const { user, loading } = useAuth();
     const [ultimaActualizacion, setUltimaActualizacion] = useState("");
     const [ejercicios, setEjercicios] = useState<RutinaEjercicio[]>([]);
-    //const [image, setImage] = useState("");
-    const [loading, setLoading] = useState(false);
 
     const today = new Date();
     const dayNumber = today.getDay();
 
     useEffect(() => {
-        getRutina();
-    }, []);
+        if (!user) return;
+        getRutina(user.id);
+    }, [user]);
 
     const musculos = useMemo(() => {
         return Array.from(
@@ -34,18 +35,12 @@ export default function GymRoutine() {
         return null;
     }, [musculos]);
 
-    const getRutina = async () => {
-
-        setLoading(true);
-
-        const { data: { user } } = await supabase.auth.getUser();
-
-        if (!user) return;
+    const getRutina = async (userId: string) => {
 
         const { data, error } = await supabase.rpc(
             "get_rutina_gym",
             {
-                id_usuariod: user.id,
+                id_usuariod: userId,
                 diad: dayNumber
             }
         );

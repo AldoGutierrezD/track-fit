@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import { useAuth } from "@/context/AuthContext"
 import { Plus } from "lucide-react"
 import MacrosDia from "./MacrosDia"
 import CuerpoHoy from "./CuerpoHoy"
@@ -22,36 +23,29 @@ export default function Dashboard() {
     let dayNumber = date.getDay();
     let day = dias[dayNumber];
 
+    const { user, loading } = useAuth();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [ejerciciosPR, setEjerciciosPR] = useState<EjercicioGymPR[]>([]);
-    const [loading, setLoading] = useState(false);
 
 
-    // useEffect(() => {
-    //     getEjerciciosPR();
-    // }, []);
+    useEffect(() => {
+        if (!user) return
+        getEjerciciosPR(user.id);
+    }, [user]);
 
 
-    // const getEjerciciosPR = async () => {
+    const getEjerciciosPR = async (userId: string) => {
 
-    //     setLoading(true);
+        const { data, error } = await supabase.rpc(
+            "get_ejercicios_gym_pr",
+            { id_usuariod: userId }
+        );
 
-    //     const { data: { user } } = await supabase.auth.getUser();
+        if (!error) {
+            setEjerciciosPR(data);
+        }
 
-    //     if (!user) return
-
-    //     const { data, error } = await supabase.rpc(
-    //         "get_ejercicios_gym_pr",
-    //         { id_usuariod: user.id }
-    //     );
-
-    //     if (!error) {
-    //         setEjerciciosPR(data);
-    //     }
-
-    //     setLoading(false);
-
-    // }
+    }
 
     return (
         <section>
@@ -73,7 +67,7 @@ export default function Dashboard() {
                 </div>
             </section>
 
-            {/* <section className="w-full grid grid-cols-3 gap-4 mt-8">
+            <section className="w-full grid grid-cols-3 gap-4 mt-8">
                 <div className="col-span-full">
                     <GymRoutine />
                 </div>
@@ -85,14 +79,14 @@ export default function Dashboard() {
                             Nuevo PR
                         </button>
                         <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title="Registrar nuevo PR">
-                            <ModalPR onSuccess={() => setIsModalOpen(false)} refreshData={() => getEjerciciosPR()} />
+                            <ModalPR onSuccess={() => setIsModalOpen(false)} refreshData={() => getEjerciciosPR(user!.id)} />
                         </Modal>
                     </div>
                     <GymPR ejercicios={ejerciciosPR} />
                 </div>
             </section>
 
-            <section className="w-full mt-12">
+            {/* <section className="w-full mt-12">
                 <div className="col-span-2">
                     <h4 className="font-inter font-semibold text-lg mb-1">Hora de comer</h4>
                     <Diet />
