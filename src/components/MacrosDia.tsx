@@ -18,13 +18,13 @@ export default function MacrosDia() {
 
         setLoading(true);
 
-        const { data: { user } } = await supabase.auth.getUser();
+        // const { data: { user } } = await supabase.auth.getUser();
 
-        if (!user) return;
+        // if (!user) return;
 
         const { data, error } = await supabase.rpc(
             "get_usuario_macros",
-            { id_usuariod: user.id }
+            { id_usuariod: 'cfdafd0b-60bd-4462-9f0f-6cadeebf820c' }
         )
 
         if (error || !data) {
