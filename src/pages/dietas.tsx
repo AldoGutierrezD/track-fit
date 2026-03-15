@@ -736,8 +736,8 @@ export default function Sesiones() {
                 <h2 className="font-brule text-xl">Dieta actual</h2>
             </div>
 
-            <div className="w-full mb-30">
-                <div className="w-full overflow-auto">
+            <div className="w-full mb-30 grid grid-cols-1">
+                <div className="col-span-1 overflow-x-auto">
                     <table className="text-center w-full">
                         <thead>
                             <tr>
