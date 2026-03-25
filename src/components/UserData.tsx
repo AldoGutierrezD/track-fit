@@ -30,11 +30,27 @@ export default function RightBar() {
 
         if (!error) {
             setNombre(data[0].nombre);
-            setEdad(data[0].edad);
+            getEdad(data[0].fecha_nacimiento);
             setEstatura(data[0].estatura);
             setPeso(data[0].peso);
         }
 
+    }
+
+
+    function getEdad(fechaNacimiento: string) {
+        const hoy = new Date();
+        const nacimiento = new Date(fechaNacimiento);
+
+        let edad = hoy.getFullYear() - nacimiento.getFullYear();
+
+        const cumpliAnios =
+            hoy.getMonth() > nacimiento.getMonth() ||
+            (hoy.getMonth() === nacimiento.getMonth() && hoy.getDate() >= nacimiento.getDate());
+
+        if (!cumpliAnios) edad--;
+
+        setEdad(edad.toString());
     }
 
 
@@ -64,7 +80,7 @@ export default function RightBar() {
             <div className="w-full h-auto bg-green-300 rounded-2xl p-5 border-3">
 
                 <div className="w-full h-80">
-                    <img src="/images/right-cover.webp" alt="" className="w-full h-full object-cover border-3 rounded-xl" />
+                    <img src="/images/right-cover-2.webp" alt="" className="w-full h-full object-cover border-3 rounded-xl" />
                 </div>
 
                 <div className="w-full border-3 bg-amber-50 p-2 mt-4">
