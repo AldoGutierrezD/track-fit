@@ -48,7 +48,7 @@ export default function Dashboard() {
 
     return (
         <section>
-            <h1 className="font-against text-2xl mt-6">Hola, Aldo!</h1>
+            <h1 className="font-against text-2xl mt-6">Hola de vuelta!</h1>
             <h4 className="font-brule text-base font-light">Espero que tengas un excelente {day}</h4>
 
             <section className="w-full grid grid-cols-3 lg:grid-cols-4 xl:grid-cols-3 gap-4 items-stretch mt-4">
