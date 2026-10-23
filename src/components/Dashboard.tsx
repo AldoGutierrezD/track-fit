@@ -14,7 +14,6 @@ import { EjercicioGymPR } from "@/types/interfaces"
 import WeightChart from "./WeightChart"
 import FatChart from "./FatChart"
 import BodyMassChart from "./BodyMassChart"
-import BicepChart from "./BicepChart"
 
 export default function Dashboard() {
 
