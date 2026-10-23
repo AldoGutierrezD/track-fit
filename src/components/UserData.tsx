@@ -80,7 +80,7 @@ export default function RightBar() {
             <div className="w-full h-auto bg-green-300 rounded-2xl p-5 border-3">
 
                 <div className="w-full h-80">
-                    <img src="/images/right-cover-2.webp" alt="" className="w-full h-full object-cover border-3 rounded-xl" />
+                    <img src="/images/right-cover.webp" alt="" className="w-full h-full object-cover border-3 rounded-xl" />
                 </div>
 
                 <div className="w-full border-3 bg-amber-50 p-2 mt-4">
